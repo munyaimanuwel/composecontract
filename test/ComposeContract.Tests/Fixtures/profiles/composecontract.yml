@@ -1,0 +1,22 @@
+version: 1
+project:
+  compose: compose.yml
+env:
+  example: .env.example
+profiles:
+  default: []
+  worker: [worker]
+rules:
+  services:
+    required: [api, worker]
+  env:
+    required: []
+    optional: []
+  options:
+    assemblies: []
+    types: []
+severity:
+  missing_service: error
+  missing_env_required: error
+  missing_env_optional: warn
+  unknown_env_in_example: warn
