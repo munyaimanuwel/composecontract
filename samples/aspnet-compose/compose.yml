@@ -1,0 +1,6 @@
+services:
+  api:
+    image: aspnet-compose-sample:local
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Default=

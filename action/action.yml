@@ -1,0 +1,41 @@
+name: ComposeContract Validate
+description: Run composecontract validate (local-first; no Docker daemon)
+inputs:
+  contract:
+    description: Path to composecontract.yml
+    required: false
+    default: composecontract.yml
+  strict:
+    description: Promote warnings to errors
+    required: false
+    default: 'true'
+  working-directory:
+    description: Working directory
+    required: false
+    default: '.'
+runs:
+  using: composite
+  steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    - name: Install composecontract tool
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        set -euo pipefail
+        if [ -d nupkg ]; then
+          dotnet tool install --add-source ./nupkg -g composecontract --version 0.1.0
+        else
+          dotnet pack ComposeContract.sln -c Release -o ./nupkg
+          dotnet tool install --add-source ./nupkg -g composecontract --version 0.1.0
+        fi
+        echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+    - name: Validate
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        ARGS=(validate --contract "${{ inputs.contract }}")
+        if [ "${{ inputs.strict }}" = "true" ]; then ARGS+=(--strict); fi
+        composecontract "${ARGS[@]}"
