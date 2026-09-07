@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\ComposeContract.Core\ComposeContract.Core.csproj" />
+    <ProjectReference Include="..\ComposeContract.Compose\ComposeContract.Compose.csproj" />
+    <ProjectReference Include="..\ComposeContract.Env\ComposeContract.Env.csproj" />
+    <ProjectReference Include="..\ComposeContract.Options\ComposeContract.Options.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><PackageId>ComposeContract.Engine</PackageId><Version>0.1.0</Version><Authors>Manuwel Munyai</Authors><PackageLicenseExpression>MIT</PackageLicenseExpression><RepositoryUrl>https://github.com/munyaimanuwel/composecontract</RepositoryUrl><GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+</Project>
