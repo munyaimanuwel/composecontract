@@ -1,5 +1,4 @@
 namespace ComposeContract.Engine;
-
 public sealed class ValidationOptions
 {
     public string ContractPath { get; init; } = "composecontract.yml";
