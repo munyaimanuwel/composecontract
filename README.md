@@ -1,5 +1,7 @@
 # StackContract
 
+[![NuGet](https://img.shields.io/nuget/v/stackcontract.svg)](https://www.nuget.org/packages/stackcontract)
+
 Local-first **.NET stack/config contract checker**. Catch missing services and env keys before runtime — no Docker daemon required for `validate`.
 
 Not affiliated with Docker, Inc. Referential mentions of Docker Compose in prose describe the compose-file format this tool reads.
@@ -16,9 +18,7 @@ MIT licensed. Open-core: the engine stays free forever with **zero network** in 
 
 ```bash
 # requires .NET 8 SDK
-dotnet pack StackContract.sln -c Release -o ./nupkg
-dotnet tool install --add-source ./nupkg -g stackcontract --version 0.1.0
-
+dotnet tool install -g stackcontract
 cd samples/aspnet-compose
 stackcontract init --compose compose.yml --force
 stackcontract validate --strict
@@ -50,7 +50,7 @@ See [`action/action.yml`](action/action.yml) — packs/installs the tool and run
 
 MIT core (CLI, engine, libraries, GitHub Action) stays free and local-first — **zero network** in Core/Engine.
 
-**StackContract Pro Kit** (after the tool is on NuGet): paid templates, CI extras, and kits. Those files are not in this repository.
+**StackContract Pro Kit**: paid templates, CI extras, and kits. Those files are not in this repository.
 
 Pricing and delivery will be linked here when the Polar product is live.
 
