@@ -1,10 +1,10 @@
-name: ComposeContract Validate
-description: Run composecontract validate (local-first; no Docker daemon)
+name: StackContract Validate
+description: Run stackcontract validate (local-first; no Docker daemon)
 inputs:
   contract:
-    description: Path to composecontract.yml
+    description: Path to stackcontract.yml
     required: false
-    default: composecontract.yml
+    default: stackcontract.yml
   strict:
     description: Promote warnings to errors
     required: false
@@ -20,16 +20,16 @@ runs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
-    - name: Install composecontract tool
+    - name: Install stackcontract tool
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: |
         set -euo pipefail
         if [ -d nupkg ]; then
-          dotnet tool install --add-source ./nupkg -g composecontract --version 0.1.0
+          dotnet tool install --add-source ./nupkg -g stackcontract --version 0.1.0
         else
-          dotnet pack ComposeContract.sln -c Release -o ./nupkg
-          dotnet tool install --add-source ./nupkg -g composecontract --version 0.1.0
+          dotnet pack StackContract.sln -c Release -o ./nupkg
+          dotnet tool install --add-source ./nupkg -g stackcontract --version 0.1.0
         fi
         echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
     - name: Validate
@@ -38,4 +38,4 @@ runs:
       run: |
         ARGS=(validate --contract "${{ inputs.contract }}")
         if [ "${{ inputs.strict }}" = "true" ]; then ARGS+=(--strict); fi
-        composecontract "${ARGS[@]}"
+        stackcontract "${ARGS[@]}"
