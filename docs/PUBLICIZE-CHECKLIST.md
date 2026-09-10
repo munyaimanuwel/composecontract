@@ -52,10 +52,20 @@ Do these in order. Check boxes as you go. JARVIS will not flip visibility or pub
 
 ## 4. NuGet (after Public)
 
-- [ ] NuGet.org account + API key ready (personal, not work) — no `NUGET_API_KEY` in this environment
+Use **Trusted Publishing** (GitHub Actions OIDC). Do not create a long-lived API key.
+
+- [ ] nuget.org account (personal Microsoft or GitHub sign-in — not work email)
+- [ ] Trusted Publishing policy on nuget.org (username → **Trusted Publishing** → add):
+  - Repository Owner: `munyaimanuwel`
+  - Repository: `stackcontract`
+  - Workflow File: `publish.yml` (filename only)
+  - Environment: leave empty
+  - Scopes: allow **new packages** and **new versions**; glob `stackcontract*`
+- [ ] GitHub repo secret `NUGET_USER` = nuget.org **profile name** (not email)
 - [x] Package IDs free: `stackcontract` tool + `StackContract.*` libraries
 - [x] Set `PackageProjectUrl` / `RepositoryUrl` to final public URL (`https://github.com/munyaimanuwel/stackcontract`)
-- [ ] `dotnet nuget push` Release packages
+- [x] Workflow `.github/workflows/publish.yml` (OIDC `NuGet/login`, no stored API key)
+- [ ] Run **Actions → Publish NuGet → Run workflow** with tag `v0.1.0`
 - [ ] Verify: `dotnet tool install -g stackcontract` (no local source)
 - [ ] README badge: NuGet version + install one-liner
 
@@ -82,7 +92,7 @@ Do these in order. Check boxes as you go. JARVIS will not flip visibility or pub
 ## Stop lines (do not skip)
 
 1. **Do not** make Public until scrub (section 1) is checked.  
-2. **Do not** push NuGet until the repo is Public and `RepositoryUrl` matches the live slug.  
+2. **Do not** push NuGet until the repo is Public, `RepositoryUrl` matches the live slug, and Trusted Publishing is configured (no long-lived API key).  
 3. **Do not** sell Pro Kit until free core is installable from NuGet without a private feed.  
 4. Personal email / accounts only — no work email or employer disclosure.
 
@@ -96,7 +106,7 @@ Do these in order. Check boxes as you go. JARVIS will not flip visibility or pub
 | Repo slug → `stackcontract` | Done |
 | Visibility → Public | Done |
 | GitHub Release `v0.1.0` | Done |
-| NuGet publish | Blocked on personal NuGet API key |
+| NuGet publish | Blocked on nuget.org account + Trusted Publishing policy |
 | Pro Kit | Blocked on NuGet + Polar product |
 
 When you’re ready for a step, tell JARVIS which checkbox number to execute (e.g. “do 4”) — otherwise this doc stays checklist-only.
