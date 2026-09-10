@@ -14,7 +14,8 @@
     <Version>0.1.0</Version>
     <Authors>Manuwel Munyai</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/munyaimanuwel/composecontract</RepositoryUrl>
+    <RepositoryUrl>https://github.com/munyaimanuwel/stackcontract</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/munyaimanuwel/stackcontract</PackageProjectUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

@@ -46,6 +46,14 @@ Local `.env` is checked for **key presence only** — values never appear in tex
 
 See [`action/action.yml`](action/action.yml) — packs/installs the tool and runs `validate --strict`.
 
+## Sponsors / Pro
+
+MIT core (CLI, engine, libraries, GitHub Action) stays free and local-first — **zero network** in Core/Engine.
+
+**StackContract Pro Kit** (after the tool is on NuGet): paid templates, CI extras, and kits. Those files are not in this repository.
+
+Pricing and delivery will be linked here when the Polar product is live.
+
 ## What it is not
 
 Not a Compose emulator, vault product, K8s/Helm checker, or SaaS. No phone-home in the engine.
