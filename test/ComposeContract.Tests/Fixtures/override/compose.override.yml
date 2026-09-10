@@ -1,6 +1,0 @@
-services:
-  api:
-    environment:
-      - ConnectionStrings__Default=
-  db:
-    image: postgres:16
