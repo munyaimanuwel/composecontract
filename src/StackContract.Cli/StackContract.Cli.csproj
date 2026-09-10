@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\StackContract.Engine\StackContract.Engine.csproj" />
+    <ProjectReference Include="..\StackContract.Core\StackContract.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup><PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" /></ItemGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><PackAsTool>true</PackAsTool><ToolCommandName>stackcontract</ToolCommandName><PackageId>stackcontract</PackageId><RootNamespace>StackContract.Cli</RootNamespace><AssemblyName>StackContract.Cli</AssemblyName><Version>0.1.0</Version><Authors>Manuwel Munyai</Authors><Description>Local-first .NET stack/config contract checker.</Description><PackageLicenseExpression>MIT</PackageLicenseExpression><RepositoryUrl>https://github.com/munyaimanuwel/composecontract</RepositoryUrl>
+  </PropertyGroup>
+</Project>
