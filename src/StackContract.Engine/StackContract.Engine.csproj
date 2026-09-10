@@ -6,6 +6,6 @@
     <ProjectReference Include="..\StackContract.Options\StackContract.Options.csproj" />
   </ItemGroup>
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><PackageId>StackContract.Engine</PackageId><RootNamespace>StackContract.Engine</RootNamespace><AssemblyName>StackContract.Engine</AssemblyName><Version>0.1.0</Version><Authors>Manuwel Munyai</Authors><PackageLicenseExpression>MIT</PackageLicenseExpression><RepositoryUrl>https://github.com/munyaimanuwel/composecontract</RepositoryUrl><GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><PackageId>StackContract.Engine</PackageId><RootNamespace>StackContract.Engine</RootNamespace><AssemblyName>StackContract.Engine</AssemblyName><Version>0.1.0</Version><Authors>Manuwel Munyai</Authors><PackageLicenseExpression>MIT</PackageLicenseExpression><RepositoryUrl>https://github.com/munyaimanuwel/stackcontract</RepositoryUrl><PackageProjectUrl>https://github.com/munyaimanuwel/stackcontract</PackageProjectUrl><GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 </Project>
