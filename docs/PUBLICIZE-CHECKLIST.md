@@ -44,9 +44,9 @@ Do these in order. Check boxes as you go. JARVIS will not flip visibility or pub
 
 ## 3. First public release hygiene
 
-- [ ] Tag `v0.1.0` (or next semver) on the public `main` commit
-- [ ] GitHub Release notes: what it does, install, `stackcontract validate --strict`, migration from ComposeContract names
-- [ ] Smoke from a clean machine: clone → pack → `dotnet tool install -g stackcontract` → `validate` on `samples/`
+- [x] Tag `v0.1.0` (or next semver) on the public `main` commit
+- [x] GitHub Release notes: what it does, install, `stackcontract validate --strict`, migration from ComposeContract names
+- [x] Smoke from a clean machine: clone → pack → `dotnet tool install -g stackcontract` → `validate` on `samples/` (clone of `v0.1.0` → pack → tool-path install → `validate --strict` OK)
 
 ---
 
@@ -95,6 +95,7 @@ Do these in order. Check boxes as you go. JARVIS will not flip visibility or pub
 | Rename code → StackContract | Done (main) |
 | Repo slug → `stackcontract` | Done |
 | Visibility → Public | Done |
+| GitHub Release `v0.1.0` | Done |
 | NuGet publish | Blocked on personal NuGet API key |
 | Pro Kit | Blocked on NuGet + Polar product |
 
