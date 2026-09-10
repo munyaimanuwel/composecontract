@@ -10,3 +10,4 @@ tool-install/
 TestResults/
 release/
 .env
+docs/PUBLICIZE-CHECKLIST.md
