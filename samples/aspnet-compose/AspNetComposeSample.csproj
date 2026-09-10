@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ComposeContract.AspNetCore\ComposeContract.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\StackContract.AspNetCore\StackContract.AspNetCore.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
