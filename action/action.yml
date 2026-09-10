@@ -26,11 +26,11 @@ runs:
       run: |
         set -euo pipefail
         if [ -d nupkg ]; then
-          dotnet tool install --add-source ./nupkg -g stackcontract --version 0.1.0
+          dotnet tool install --add-source ./nupkg -g stackcontract
         else
-          dotnet pack StackContract.sln -c Release -o ./nupkg
-          dotnet tool install --add-source ./nupkg -g stackcontract --version 0.1.0
+          dotnet tool install -g stackcontract
         fi
+
         echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
     - name: Validate
       shell: bash

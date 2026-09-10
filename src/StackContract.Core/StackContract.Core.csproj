@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/munyaimanuwel/stackcontract</RepositoryUrl>
     <PackageProjectUrl>https://github.com/munyaimanuwel/stackcontract</PackageProjectUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

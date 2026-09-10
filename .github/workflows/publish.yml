@@ -11,7 +11,15 @@ on:
       tag:
         description: Git tag to pack and publish
         required: true
-        default: v0.1.0
+        default: v0.1.1
+      mode:
+        description: publish public packages, or unlist internal 0.1.0 IDs
+        required: true
+        default: publish
+        type: choice
+        options:
+          - publish
+          - unlist-internal
 
 concurrency:
   group: nuget-publish
@@ -22,6 +30,7 @@ permissions:
 
 jobs:
   pack:
+    if: github.event_name == 'release' || inputs.mode == 'publish'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -33,7 +42,17 @@ jobs:
         with:
           dotnet-version: '8.0.x'
       - run: dotnet test StackContract.sln -c Release --nologo
-      - run: dotnet pack StackContract.sln -c Release -o ./nupkg --nologo
+      - name: Pack public packages only
+        run: |
+          set -euo pipefail
+          dotnet pack src/StackContract.Cli/StackContract.Cli.csproj -c Release -o ./nupkg --nologo
+          dotnet pack src/StackContract.AspNetCore/StackContract.AspNetCore.csproj -c Release -o ./nupkg --nologo
+          mapfile -t pkgs < <(find nupkg -name '*.nupkg' | sort)
+          printf '%s\n' "${pkgs[@]}"
+          if [ "${#pkgs[@]}" -ne 2 ]; then
+            echo "expected 2 nupkgs (stackcontract + StackContract.AspNetCore), got ${#pkgs[@]}"
+            exit 1
+          fi
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: nupkg
@@ -41,6 +60,7 @@ jobs:
           if-no-files-found: error
 
   publish:
+    if: github.event_name == 'release' || inputs.mode == 'publish'
     needs: pack
     runs-on: ubuntu-latest
     permissions:
@@ -62,3 +82,28 @@ jobs:
           --api-key "${{ steps.login.outputs.NUGET_API_KEY }}"
           --source https://api.nuget.org/v3/index.json
           --skip-duplicate
+
+  unlist-internal:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'unlist-internal'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: NuGet login (OIDC)
+        id: login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      - name: Unlist internal 0.1.0 packages
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          set -euo pipefail
+          for id in StackContract.Core StackContract.Engine StackContract.Compose StackContract.Env StackContract.Options; do
+            echo "Unlisting $id 0.1.0"
+            dotnet nuget delete "$id" 0.1.0 \
+              --source https://api.nuget.org/v3/index.json \
+              --api-key "$NUGET_API_KEY" \
+              --non-interactive
+          done

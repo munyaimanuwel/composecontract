@@ -1,5 +1,47 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup><ProjectReference Include="..\StackContract.Core\StackContract.Core.csproj" /></ItemGroup>
-  <ItemGroup><PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.11" /><PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11" /><PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.11" /><PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.11" /><PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" /></ItemGroup>
-  <PropertyGroup><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><PackageId>StackContract.AspNetCore</PackageId><RootNamespace>StackContract.AspNetCore</RootNamespace><AssemblyName>StackContract.AspNetCore</AssemblyName><Version>0.1.0</Version><Authors>Manuwel Munyai</Authors><PackageLicenseExpression>MIT</PackageLicenseExpression><RepositoryUrl>https://github.com/munyaimanuwel/stackcontract</RepositoryUrl><PackageProjectUrl>https://github.com/munyaimanuwel/stackcontract</PackageProjectUrl><GeneratePackageOnBuild>false</GeneratePackageOnBuild></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StackContract.Core\StackContract.Core.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="README.md" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>StackContract.AspNetCore</PackageId>
+    <RootNamespace>StackContract.AspNetCore</RootNamespace>
+    <AssemblyName>StackContract.AspNetCore</AssemblyName>
+    <Version>0.1.1</Version>
+    <Authors>Manuwel Munyai</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/munyaimanuwel/stackcontract</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/munyaimanuwel/stackcontract</PackageProjectUrl>
+    <PackageTags>dotnet;aspnetcore;configuration;options;hosting;stackcontract</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeReferencedProjectsInPackage</TargetsForTfmSpecificBuildOutput>
+    <Description>ASP.NET Core host check that fails startup when required configuration keys are missing.
+
+Call `IHostBuilder.UseStackContractKeyCheck` with the keys your app must have (for example ConnectionStrings__Default). A hosted service reads IConfiguration at StartAsync; missing or whitespace-only values log ENV_REQUIRED_MISSING and throw InvalidOperationException so the process does not stay up half-configured. Complements Microsoft.Extensions.Options.ValidateOnStart — it checks key presence, not options binding.
+
+This package does not read Docker Compose or .env files. Use the `stackcontract` global tool in CI for compose/env contracts. Internals (StackContract.Core) are bundled; you do not need a separate Core package.
+
+MIT licensed. Not affiliated with Docker, Inc. Repo: https://github.com/munyaimanuwel/stackcontract</Description>
+    <PackageReleaseNotes>0.1.1: Detailed package description and README. Bundles StackContract.Core so that library is not a separate NuGet dependency.</PackageReleaseNotes>
+  </PropertyGroup>
+  <Target Name="IncludeReferencedProjectsInPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
 </Project>
