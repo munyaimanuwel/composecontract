@@ -1,0 +1,5 @@
+services:
+  api:
+    image: api:local
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

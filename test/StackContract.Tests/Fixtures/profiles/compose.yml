@@ -1,0 +1,8 @@
+services:
+  api:
+    image: api:local
+  worker:
+    image: worker:local
+    profiles: [worker]
+    environment:
+      - WORKER_MODE=1

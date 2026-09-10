@@ -1,7 +1,7 @@
-using ComposeContract.AspNetCore;
+using StackContract.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseComposeContractKeyCheck(new[]
+builder.Host.UseStackContractKeyCheck(new[]
 {
     "ConnectionStrings__Default",
     "ASPNETCORE_ENVIRONMENT"
